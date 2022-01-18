@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "rn-redux-app",
+    "slug": "rn-redux-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.feniljariwala82.rnreduxapp"
+    }
+  },
+  "name": "rn-redux-app"
+}
