@@ -8,6 +8,7 @@ import { StatusBar } from "react-native";
 import HomeScreen from "screens/HomeScreen";
 import ProfileScreen from "screens/ProfileScreen";
 import SettingsScreen from "screens/SettingsScreen";
+import TodoIndexScreen from "screens/Todo/Index";
 import { DarkTheme, LightTheme } from "themes/Themes";
 
 const Stack = createNativeStackNavigator();
@@ -37,7 +38,7 @@ const MainDrawerNavigator = () => {
     >
       <Drawer.Screen
         name="HomeDrawer"
-        component={HomeScreen}
+        component={TodoIndexScreen}
         options={({ navigation }) => ({
           title: "Home",
           headerRight: () => {
@@ -57,6 +58,11 @@ const MainDrawerNavigator = () => {
         name="ProfileDrawer"
         component={ProfileScreen}
         options={{ title: "Profile" }}
+      />
+      <Drawer.Screen
+        name="TodoDrawer"
+        component={TodoIndexScreen}
+        options={{ title: "Todo" }}
       />
     </Drawer.Navigator>
   );

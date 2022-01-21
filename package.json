@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "expo start --clear",
     "start": "expo start --dev-client",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web"
+    "android": "expo run:android --clear",
+    "ios": "expo run:ios --clear",
+    "web": "expo start --web --clear"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -16,6 +16,7 @@
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "@reduxjs/toolkit": "^1.7.1",
+    "axios": "^0.25.0",
     "expo": "~44.0.2",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
