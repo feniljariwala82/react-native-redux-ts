@@ -6,6 +6,7 @@ export const index = async () => {
     const todos = await instance.get<TodoType[]>("/todos");
     return Promise.resolve(todos.data);
   } catch (error) {
+    console.log(error);
     return Promise.reject(error);
   }
 };

@@ -1,9 +1,9 @@
-import React, { useEffect, Fragment } from "react";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import Todo from "features/todo/Todo";
+import { fetchTodos, selectAllPosts } from "features/todo/todoSlice";
+import React, { useEffect } from "react";
 import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { fetchTodos, selectAllPosts } from "features/todo/todoSlice";
-import Todo from "features/todo/Todo";
 
 const Index = () => {
   const dispatch = useAppDispatch();
@@ -16,29 +16,43 @@ const Index = () => {
     }
   }, [dispatch, fetchTodos]);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      {todoState.status === "loading" ? (
-        <>
-          <Text>Loading..</Text>
-        </>
-      ) : (
-        <>
-          <Text>Todo Index Page!</Text>
-          {todos.map((todo) => {
-            return (
-              <Todo
-                id={todo.id}
-                userId={todo.userId}
-                title={todo.title}
-                completed={todo.completed}
-              />
-            );
-          })}
-        </>
-      )}
-    </SafeAreaView>
-  );
+  const render = () => {
+    switch (todoState.status) {
+      case "loading":
+        return (
+          <>
+            <Text>Loading..</Text>
+          </>
+        );
+
+      case "failed":
+        return (
+          <>
+            <Text>{todoState.error}</Text>
+          </>
+        );
+
+      default:
+        return (
+          <>
+            <Text>Todo Index Page!</Text>
+            {todos.map((todo) => {
+              return (
+                <Todo
+                  id={todo.id}
+                  userId={todo.userId}
+                  title={todo.title}
+                  completed={todo.completed}
+                  key={todo.id}
+                />
+              );
+            })}
+          </>
+        );
+    }
+  };
+
+  return <SafeAreaView style={styles.container}>{render()}</SafeAreaView>;
 };
 
 export default Index;
