@@ -77,6 +77,7 @@ const MainNavigator = () => {
                   : LightTheme.colors.background,
             },
             headerShown: false,
+            animation: "fade_from_bottom",
           }}
         >
           <Stack.Screen
