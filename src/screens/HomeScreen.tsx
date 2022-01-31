@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   body: {
     fontSize: 24,
     marginBottom: 20,
+    fontFamily: "open-regular",
   },
   btnGroup: {
     flexDirection: "row",

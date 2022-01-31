@@ -23,8 +23,8 @@ const MainDrawerNavigator = () => {
         drawerStyle: {
           backgroundColor:
             mode === "dark"
-              ? DarkTheme.colors.background
-              : LightTheme.colors.background,
+              ? DarkTheme.colors.card
+              : LightTheme.colors.card,
         },
         headerStyle: {
           backgroundColor:
@@ -34,11 +34,14 @@ const MainDrawerNavigator = () => {
         },
         headerTintColor:
           mode === "dark" ? DarkTheme.colors.text : LightTheme.colors.text,
+        headerTitleStyle: {
+          fontFamily: "open-bold",
+        },
       }}
     >
       <Drawer.Screen
         name="HomeDrawer"
-        component={TodoIndexScreen}
+        component={HomeScreen}
         options={({ navigation }) => ({
           title: "Home",
           headerRight: () => {
@@ -84,6 +87,9 @@ const MainNavigator = () => {
             },
             headerShown: false,
             animation: "fade_from_bottom",
+            headerTitleStyle: {
+              fontFamily: "open-bold",
+            },
           }}
         >
           <Stack.Screen

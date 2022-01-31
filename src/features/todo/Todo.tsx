@@ -1,12 +1,22 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { TodoType } from "types";
 
-const Todo = (props: TodoType) => {
+function Todo (props: TodoType) {
   const { id, userId, title, completed } = props;
+  const { colors } = useTheme();
+
   return (
-    <View>
-      <Text>{id}</Text>
+    <View style={[styles.container, { borderColor: colors.text }]}>
+      <View style={styles.leftView}>
+        <Text style={{ color: colors.text }}>
+          {id}. {title}
+        </Text>
+      </View>
+      <View style={styles.rightView}>
+        <Button title="Show" onPress={() => {}} />
+      </View>
     </View>
   );
 };
@@ -14,5 +24,21 @@ const Todo = (props: TodoType) => {
 export default Todo;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flex: 1,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    margin: 5,
+    padding: 16,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  leftView: {
+    width: "70%",
+    padding: 2,
+  },
+  rightView: {
+    width: "30%",
+  },
 });

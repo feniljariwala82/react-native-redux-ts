@@ -52,6 +52,7 @@ export const todoSlice = createSlice({
 
 export const {} = todoSlice.actions;
 
-export const { selectAll: selectAllPosts } = todoAdapter.getSelectors();
+export const { selectAll: selectAllTodo, selectById: selectTodoById } =
+  todoAdapter.getSelectors();
 
 export default todoSlice.reducer;

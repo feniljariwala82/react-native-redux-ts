@@ -1,27 +1,31 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import Progress from "components/view/Progress";
 import Todo from "features/todo/Todo";
-import { fetchTodos, selectAllPosts } from "features/todo/todoSlice";
-import React, { useEffect } from "react";
-import { StyleSheet, Text } from "react-native";
+import { fetchTodos, selectAllTodo } from "features/todo/todoSlice";
+import React, { useCallback } from "react";
+import { FlatList, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Index = () => {
   const dispatch = useAppDispatch();
   const todoState = useAppSelector((state) => state.todo);
-  const todos = selectAllPosts(todoState);
+  const todos = selectAllTodo(todoState);
 
-  useEffect(() => {
-    if (todoState.status === "idle") {
-      dispatch(fetchTodos());
-    }
-  }, [dispatch, fetchTodos]);
+  useFocusEffect(
+    useCallback(() => {
+      if (todoState.status === "idle") {
+        dispatch(fetchTodos());
+      }
+    }, [dispatch, fetchTodos])
+  );
 
   const render = () => {
     switch (todoState.status) {
       case "loading":
         return (
           <>
-            <Text>Loading..</Text>
+            <Progress />
           </>
         );
 
@@ -35,18 +39,22 @@ const Index = () => {
       default:
         return (
           <>
-            <Text>Todo Index Page!</Text>
-            {todos.map((todo) => {
-              return (
+            <FlatList
+              data={todos}
+              renderItem={({ item }) => (
                 <Todo
-                  id={todo.id}
-                  userId={todo.userId}
-                  title={todo.title}
-                  completed={todo.completed}
-                  key={todo.id}
+                  id={item.id}
+                  userId={item.userId}
+                  title={item.title}
+                  completed={item.completed}
+                  key={item.id}
                 />
-              );
-            })}
+              )}
+              keyExtractor={({ id }) => id.toString()}
+              refreshing={false}
+              onRefresh={() => dispatch(fetchTodos())}
+              initialNumToRender={20}
+            />
           </>
         );
     }
